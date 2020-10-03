@@ -29,7 +29,7 @@ passport.use(new GoogleStartegy({
         done(null, existingUser);
     } else {
         // We don't have a record with the given profile id
-        const user = await new User({ googleID: profule.id }).save();
+        const user = await new User({ googleID: profile.id }).save();
         done(null, user);
     }
 }));

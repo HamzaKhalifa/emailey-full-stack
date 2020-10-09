@@ -20,7 +20,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStartegy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback',
+    callbackURL: '/api/auth/google/callback',
     proxy: true // To allow the strategy to to use https even for proxies
 }, async (accessToken, refreshToken, profile, done) => {
     const existingUser = await User.findOne({ googleID: profile.id });

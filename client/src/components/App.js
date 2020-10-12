@@ -4,9 +4,12 @@ import Header from './Header';
 import { fetchUser } from '../actions/index';
 import { useDispatch } from 'react-redux';
 import Landing from '../components/Landing';
+import Dashboard from '../components/Dashboard';
+import SurveyNew from '../components/surveys/SurveyNew';
 
-const Dashboard = () => (<h2>Dashboard</h2>)
-const SurveyNew = () => (<h2>SurveyNew</h2>)
+// Development only axios helpers 
+import axios from 'axios';
+window.axios = axios;
 
 function App() {
   const dispatch = useDispatch();

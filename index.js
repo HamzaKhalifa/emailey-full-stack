@@ -2,6 +2,7 @@ const express = require('express');
 // Connect to mongoose
 require('./services/mongoose');
 require('./models/user');
+require('./models/survey');
 // Run passport google strategy configuration
 require('./services/passport');
 const cookieSession = require('cookie-session');
@@ -23,6 +24,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // Run this only in production environment
 if (process.env.NODE_ENV == 'production') {

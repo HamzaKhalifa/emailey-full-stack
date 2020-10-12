@@ -2,13 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
+import Spinner from './ui/Spinner';
 
 function Header() {
     const { loading, user } = useSelector(state => state.auth);
 
     const renderContent = () => {
         if (loading) {
-            return;
+            return (<div style={{marginRight: 20, marginTop: 7}}><Spinner></Spinner></div>)
         } else if (user) {
             return <>
                 <li><Payments /></li>
@@ -23,7 +24,7 @@ function Header() {
     return (
         <nav>
             <div className="nav-wrapper">
-                <Link to={user ? '/surveys' : '/'} className="left brand-logo">Emailey</Link>
+                <Link to={user ? '/surveys' : '/'} className="left brand-logo" style={{ marginLeft: 10 }}>Emailey</Link>
                 <ul className="right">
                     {renderContent()}
                 </ul>

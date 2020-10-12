@@ -12,9 +12,13 @@ const Survey = mongoose.model('survey');
 
 module.exports = (app) => {
     app.get('/api/surveys', requireLogin, async (req,res) => {
-        const surveys = await Survey.find({ _user: req.user.id });
+        try {
+            const surveys = await Survey.find({ _user: req.user._id }).select({ recipients: false });
 
-        res.send(surveys);
+            res.send(surveys);
+        } catch(error) {
+            res.send({error: error.message });
+        }
     });
 
     app.get('/api/surveys/:surveyId/:choice', requireLogin, (req, res) => {
@@ -49,7 +53,6 @@ module.exports = (app) => {
         const p = new Path('/api/surveys/:surveyId/:choice');
         const events = _.chain(req.body).map(({ email, url }) => {
             const match = p.test(new URL(url).pathname);
-            console.log('match', match);
             if (match) return ({ email, surveyId: match.surveyId, choice: match.choice });
         })
         .compact()
